@@ -102,7 +102,7 @@ int main()
             case 1:
                 do {
                     print_Toy_menu();
-                    variant = get_variant(5);
+                    variant = get_variant(6);
                     switch (variant) 
                     {
                     case 1:
