@@ -15,7 +15,7 @@ public:
     void deleteData();
     void editData();
     int setId();
-    void showNameAndSurname();
     int getId();
+    int getAge();
 };
 

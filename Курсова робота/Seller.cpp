@@ -5,11 +5,32 @@
 
 using namespace std;
 
-
-
 int Seller::getId()
 {
     return id;
+}
+
+int Seller::getAge()
+{
+    int input;
+    bool valid = false;
+    do
+    {
+        cin >> input;
+        if (cin.good())
+        {
+            valid = true;
+            //return input;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Помилка вводу. Введіть ще раз" << endl;
+        }
+    } while (!valid);
+    return input;
+
 }
 
 int Seller::setId()
@@ -38,7 +59,7 @@ void Seller::create()
     cout << "\nІм'я: "; cin >> name;
     cout << "Прізвище: "; cin >> surname;
     cout << "По батькові: "; cin >> patronymic;
-    cout << "Дата народження: "; cin >> age;
+    cout << "Вік: "; age=getAge();
     id = setId();
 }
 
@@ -48,7 +69,7 @@ void Seller::showData()
     cout << "Ім'я: " << name << endl;
     cout << "Прізвище: " << surname << endl;
     cout << "По батькові: " << patronymic << endl;
-    cout << "Вік: " << age << endl;
+    cout << "Вік: " << age << endl << endl;
 }
 
 void Seller::read(int pn)
@@ -126,22 +147,6 @@ int Seller::search(int variant)
             {
                 seller.showData();
             }
-            break;
-        //case 6:
-
-        //    if (atoi(str) == seller.numberDocument)
-        //    {
-        //        seller.showData();
-        //    }
-        //    break;
-        //case 7:
-        //    if (0 == strcmp(str, seller.dateOfExpiry))
-        //    {
-        //        seller.showData();
-        //    }
-        //    break;
-        default:
-            cout << "Помилка вводу. Введіть ще раз\n";
             break;
         }
     }

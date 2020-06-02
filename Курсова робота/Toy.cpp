@@ -4,6 +4,36 @@
 #include <string>
 using namespace std;
 
+void Toy::showSold()
+{
+    if (sold == true)
+        cout << "так\n";
+    else cout << "ні\n";
+}
+
+double Toy::getPrice()
+{
+    double input;
+    bool valid = false;
+    do
+    {
+        cin >> input;
+        if (cin.good())
+        {
+            valid = true;
+            //return input;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Помилка вводу. Введіть ще раз" << endl;
+        }
+    } while (!valid);
+    return input;
+
+}
+
 int Toy::setId()
 {
     int id;
@@ -29,26 +59,25 @@ void Toy::create()
     cin.ignore(10, '\n');
     cout << "\nІм'я: "; cin >> name;
     cout << "Вікова категорія: "; cin >> ageСategory;
-    cout << "Ціна: "; cin >> price;
+    cout << "Ціна: "; price = getPrice();
     cout << "Продано(т/н): "; sold = getSold();
-    if (sold == true)
+    if (sold == 1)
     {
-        cout << "id продавця: "; getSeller();
+       sellerId = getSeller();
     }
-
     id = setId();
 }
 
 void Toy::showData()
 {
     cout << "id: " << id << endl;
-    cout << "Ім'я: " << name << endl;
-    cout << "Прізвище: " << ageСategory << endl;
-    cout << "По батькові: " << price << endl;
-    cout << "Вік: " << sold << endl;
+    cout << "Назва: " << name << endl;
+    cout << "Вікова категорія: " << ageСategory << endl;
+    cout << "ціна: " << price << endl;
+    cout << "продано: "; showSold();
     if (sold == true)
     {
-        cout << "Вік: ";  seller.showNameAndSurname();
+        cout << "id продавця що продав: " << sellerId;
     }
     
 }
@@ -84,19 +113,11 @@ bool Toy::getSold()
 {
     char ch;
     cin >> ch;
-    while (ch != 'т'|| ch !='н')
-    {
-        cout << "\nНеправильний ввід. Спробуйте ще раз\n";
-        cin >> ch;
-        if (ch == 'т')
-            return true;
-        else
-            return false;
-    }
-
+    if (ch == 'т')
+        return true;
 }
 
-void Toy::getSeller()
+int Toy::getSeller()
 {
 
     Seller seller;
@@ -104,18 +125,27 @@ void Toy::getSeller()
     int id;
     ifile.open("Seller.dat", ios::binary | ios::out | ios::in);
     ifile.seekg(0);
-    cout << "Введіть id працівника: ";
-    cin >> id;
-    for (int i = 0; i < count(); i++)
+    int ok = 0;
+    int n;
+    while (ok != 1)
     {
-        ifile.seekg(i * sizeof(Seller));
-        ifile.read(reinterpret_cast<char*>(&seller), sizeof(Seller));
-        if (id == seller.getId)
+        cout << "Введіть id працівника: ";
+        cin >> id;
+        for (int i = 0; i < count(); i++)
         {
-            return seller.showNameAndSurname();
+            ifile.seekg(i * sizeof(Seller));
+            ifile.read(reinterpret_cast<char*>(&seller), sizeof(Seller));
+            n = seller.getId();
+            if (id == n)
+            {
+                ok = 1;
+                return seller.getId();
+            }
         }
-
+        cout << "\nПрацівника з таким id немає. Введіть ще раз\n";
     }
+    
+
 
 }
 
@@ -157,13 +187,13 @@ int Toy::search(int variant)
             }
             break;
         case 4:
-            if (atoi(str) == toy.seller.getId())
+            if (atoi(str) == toy.id)
             {
                 toy.showData();
             }
             break;
         case 5:
-            if (atoi(str) == toy.id)
+            if (atoi(str) == toy.sellerId)
             {
                 toy.showData();
             }

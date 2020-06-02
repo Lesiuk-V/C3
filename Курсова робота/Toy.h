@@ -8,6 +8,7 @@ private:
 	char age—ategory[10];
 	double price;
 	Seller seller;
+    int sellerId;
 	bool sold;
 public:
     void create();
@@ -20,6 +21,8 @@ public:
     void editData();
     int setId();
     bool getSold();
-    void getSeller();
+    int getSeller();
+    void showSold();
+    double getPrice();
 };
 
