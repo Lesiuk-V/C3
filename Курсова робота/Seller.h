@@ -6,7 +6,7 @@ protected:
 	int id;
 	double salary;
 public:
-    virtual void create() override;
+    virtual void create(int) override;
     virtual void showData() override;
     void read(int pn);
     void write();

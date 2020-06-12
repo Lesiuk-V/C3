@@ -7,7 +7,7 @@ protected:
     char patronymic[40];
     int age;
 public:
-    virtual void create();
+    virtual void create(int);
     virtual void showData();
 };
 

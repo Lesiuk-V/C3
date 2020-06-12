@@ -11,7 +11,7 @@ private:
     int sellerId;
 	bool sold;
 public:
-    void create();
+    void create(int);
     void showData();
     void read(int pn);
     void write();

@@ -1,7 +1,7 @@
 #include "Human.h"
 #include <iostream>
 using namespace std;
-void Human::create()
+void Human::create(int)
 {
     cin.ignore(10, '\n');
     cout << "\n²ì'ÿ: "; cin >> name;

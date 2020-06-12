@@ -54,7 +54,7 @@ int Toy::setId()
     return id;
 }
 
-void Toy::create()
+void Toy::create(int id)
 {
     cin.ignore(10, '\n');
     cout << "\nІм'я: "; cin >> name;
@@ -65,7 +65,10 @@ void Toy::create()
     {
        sellerId = getSeller();
     }
-    id = setId();
+    if (id == 0)
+        this->id = setId();
+    else
+        this->id = id;
 }
 
 void Toy::showData()
@@ -205,12 +208,6 @@ int Toy::search(int variant)
                     seller.showData();
                 }
                 break;
-            //case 7:
-            //    if (0 == strcmp(str, seller.dateOfExpiry))
-            //    {
-            //        seller.showData();
-            //    }
-            //    break;
         default:
             cout << "Помилка вводу. Введіть ще раз\n";
             break;
@@ -280,7 +277,7 @@ void Toy::editData()
 
         else
         {
-            toy.create();
+            toy.create(toy.id);
             temp.write(reinterpret_cast<char*>(&toy), sizeof(Toy));
         }
         file.read(reinterpret_cast<char*>(&toy), sizeof(Toy));

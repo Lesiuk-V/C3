@@ -53,7 +53,7 @@ void printSearchToyMenu()
     cout << "1. Назва" << endl;
     cout << "2. Вікова категорія" << endl;
     cout << "3. Ціна" << endl;
-    cout << "4. id" << endl;
+    cout << "4. id іграшки" << endl;
     cout << "5. id працівника" << endl;
     cout << "6. Продано" << endl;
 }
@@ -76,7 +76,7 @@ int get_variant(int max) {
 
         }
         else
-        {
+        {   
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Помилка вводу. Введіть ще раз" << endl;
@@ -109,7 +109,7 @@ int main()
                         do
                         {
                             cout << "Введіть дані іграшки: ";
-                            toy.create();
+                            toy.create(0);
                             toy.write();
                             cout << "Продовжити ввід?(т/н)?";
                             cin.ignore();
@@ -161,7 +161,7 @@ int main()
                         do
                         {
                             cout << "Введіть дані продавця: ";
-                            seller.create();
+                            seller.create(0);
                             seller.write();
                             cout << "Продовжити ввід?(т/н)?";
                             cin >> ch;

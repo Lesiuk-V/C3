@@ -53,14 +53,17 @@ int Seller::setId()
     return id;
 }
 
-void Seller::create()
+void Seller::create(int id)
 {
     cin.ignore(10, '\n');
     cout << "\nІм'я: "; cin >> name;
     cout << "Прізвище: "; cin >> surname;
     cout << "По батькові: "; cin >> patronymic;
     cout << "Вік: "; age=getAge();
-    id = setId();
+    if (id == 0)
+        this->id = setId();
+    else
+        this->id = id;
 }
 
 void Seller::showData()
@@ -214,7 +217,7 @@ void Seller::editData()
 
         else
         {
-            seller.create();
+            seller.create(seller.id);
             temp.write(reinterpret_cast<char*>(&seller), sizeof(Seller));
         }
         file.read(reinterpret_cast<char*>(&seller), sizeof(Seller));
